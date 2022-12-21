@@ -1,42 +1,45 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useMemo} from 'react'
 
 function AddItem() {
+    const [items, setItem] = useState([])
+    const [query, setQuery] =useState('')
     const inputRef = useRef()
-    const [query, setQuery] = useState([])
-    // const [movies, setMovies] = useState([])
 
-    function getMovies(e) {
+    function onSubmit(e) {
         e.preventDefault()
 
         const value = inputRef.current.value
         if(value === '') return
-        setQuery(prevQuery => {
-        return [...prevQuery, value]
+        setItem(prev => {
+            return [...prev, value]
         })
         inputRef.current.value = ''
     }
 
-    return (
-        <div className="App">
-            <header className="App-header">
-                <h1>React Movie Search</h1>
+    const filteredItems = useMemo(() => {
+        return items.filter(i => {
+        return i.toLowerCase().includes(query.toLowerCase())
+    })}, [items, query]) 
 
-                <form className='search-form' onSubmit={getMovies}>
-                <label htmlFor='searchbar'>Find movie</label>
-                <input type='text' 
-                name='searchbar'
-                ref={inputRef} 
-                // value={query}
-                // onChange={(e) => setQuery(query => e.target.value)}
-                />
-                <button type='submit'>Search</button>
+    return (
+        <div className="container">
+                <h1>Add item</h1>
+
+                <form className='search-form' onSubmit={onSubmit}>
+                    <input type='text'
+                        value={query}
+                        onChange={(e) => (setQuery(prev => e.target.value))}
+                    />
+                    <input type='text' 
+                        ref={inputRef} 
+                    />
+                    <button type='submit'>Add</button>
                 </form>
 
-                {query.map(item => (
-                <div>{query}</div>
+                {filteredItems.map(item => (
+                    <div>{item}</div>
                 ))}
 
-            </header>
         </div>
     )
 }

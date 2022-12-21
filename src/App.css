@@ -1,10 +1,109 @@
 *, *::after, *::before {
   box-sizing: border-box;
+  /* border: 1px solid navy; */
+}
+
+img {
+  display: block;
+}
+
+input {
+  font-family: inherit;
 }
 
 body {
   margin: 0;
   font-family: 'Karla', sans-serif;
-  background-color: #282c34;
+  background-color: var(--react-bg-color);
   color: #fff;
+  --react-bg-color: #282c34;
+}
+
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(140px, 400px) 1fr;
+}
+
+.movie-search-form {
+  grid-column: 2 / -2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-search-form input {
+  border: 1px solid burlywood;
+  padding: .5em;
+  margin-bottom: .1em;
+}
+
+.movie-search-form button {
+  border: 1px solid white;
+  background-color: var(--react-bg-color);
+  color: white;
+  padding: .5em 1em;
+}
+
+.movies-list {
+  grid-column: 2 / -2;
+}
+
+.movie-card {
+  display: flex;
+  align-items: center;
+  margin: 2em auto;
+}
+
+/*  Overview button expand  */
+
+.overview {
+  --max-lines: 4;
+  --line-height: 1.4;
+  
+  max-height: calc(var(--max-lines) * 1em * var(--line-height));
+  line-height: var(--line-height);
+
+  overflow: hidden;
+  position: relative;
+}
+
+.overview:has(+ .expand-btn:not(:checked))::before {
+  content: '';
+  position: absolute;
+  height: calc(2em * var(--line-height));
+  width: 100%;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, var(--react-bg-color));
+}
+
+.movie-card-poster {
+  margin-right: 1em;
+  border-radius: 8px;
+}
+
+.expand-btn {
+  appearance: none;
+  border: 1px solid white;
+  border-radius: 2px;
+  color: white;
+  padding: .5em 1em;
+  cursor: pointer;
+}
+
+.expand-btn:hover {
+  background-color: white;
+  color: var(--react-bg-color);
+}
+
+.expand-btn::before {
+  content: "Expand";
+}
+
+.expand-btn::checked::before {
+  content: "Collapse";
+}
+
+.overview:has(+ .expand-btn:checked) {
+  max-height: none;
 }
