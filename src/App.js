@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react'
 import './App.css';
 import AddItem from './AddItem.js'
+import Game from './TicTac Toe/Game'
 
 function App() {
   const queryRef = useRef()
@@ -29,6 +30,7 @@ function App() {
   return (
     <div>
       <AddItem/>
+      <Game />
 
       <main>
         <div className="container main-grid">
