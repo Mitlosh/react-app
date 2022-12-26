@@ -14,9 +14,10 @@ input {
 body {
   margin: 0;
   font-family: 'Karla', sans-serif;
-  background-color: var(--react-bg-color);
+  background-color: var(--bg-color);
   color: #fff;
   --react-bg-color: #282c34;
+  --bg-color: #2c3e50
 }
 
 /* ==============================
@@ -24,76 +25,84 @@ body {
    ============================== */
 
 .nav {
+  margin: 1em 2em;
+  height: 3em;
+  background-color: var(--react-bg-color);
+  border-radius: 8px;
   display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  color: #333;
-  background-color: darkgrey;
-  gap: 2em;
-  padding: 0 1em;
+  justify-content: center;
 }
 
 .nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  gap: 1em;
-}
-
-.site-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.nav a {
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
   display: flex;
   align-items: center;
-  padding: .5em;
+  gap: 2em;
 }
 
-.nav li:active {
-  background-color: rgb(214, 214, 214);
+.nav li {
+  list-style: none;
+  position: relative;
 }
 
-.nav li:hover {
-  background-color: rgb(214, 214, 214);
+.nav li:hover:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  bottom: -10px;
+  background-color: #9642b8;
+  border-radius: 8px;
+  padding: .2em .5em;
 }
 
+
+
+.nav a {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+}
 
 /* ==============================
     Layouts
    ============================== */
 
-.main-grid {
+.primary-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(140px, 400px) 1fr;
+  grid-template-columns: minmax(1em, 1fr) repeat(3, minmax(150px, 220px)) minmax(1em, 1fr);
+}
+
+.list-title,
+.list-label,
+.list-input,
+.list-btn {
+  grid-column: 2 / -2;
 }
 
 .movie-search-form {
   grid-column: 2 / -2;
   text-align: center;
-  display: flex;
-  flex-direction: column;
 }
 
 .movie-search-form input {
-  border: 1px solid burlywood;
-  padding: .5em;
-  margin-bottom: .1em;
+  width: 75%;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  padding: .75em;
 }
 
-.movie-search-form button {
-  border: 1px solid white;
+.movie-form-btn {
+  width: 25%;
+  border: none;
+  border-radius: 0 6px 6px 0;
   background-color: var(--react-bg-color);
   color: white;
-  padding: .5em 1em;
-}
-
-.form-btn {
+  padding: .75em 1.5em;
   cursor: pointer;
 }
 
@@ -126,7 +135,7 @@ body {
   height: calc(2em * var(--line-height));
   width: 100%;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent, var(--react-bg-color));
+  background: linear-gradient(to bottom, transparent, var(--bg-color));
 }
 
 .movie-card-poster {
@@ -145,7 +154,7 @@ body {
 
 .expand-btn:hover {
   background-color: white;
-  color: var(--react-bg-color);
+  color: var(--bg-color);
 }
 
 .expand-btn::before {

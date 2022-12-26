@@ -22,23 +22,33 @@ function ToDo() {
     })}, [items, query]) 
 
     return (
-        <div className="container">
-                <h1>Add item</h1>
+        <div className='#'>
 
-                <form className='search-form' onSubmit={onSubmit}>
-                    <input type='text'
-                        value={query}
-                        onChange={(e) => (setQuery(prev => e.target.value))}
-                    />
-                    <input type='text' 
-                        ref={inputRef} 
-                    />
-                    <button type='submit'>Add</button>
-                </form>
+            <form className='primary-grid search-form' onSubmit={onSubmit}>
+                <h1 className='list-title'>Add item</h1>
+                <label className='list-label'htmlFor='sorting'>
+                    Find item
+                </label>
+                <input className='list-input' 
+                    name='sorting'
+                    type='text'
+                    value={query}
+                    onChange={(e) => (setQuery(prev => e.target.value))}
+                />
+                <label className='list-label' htmlFor='add-item'>
+                    Add item
+                </label>
+                <input className='list-input' 
+                    name='add-item'
+                    type='text' 
+                    ref={inputRef} 
+                />
+                <button className='btn' type='submit'>Add</button>
+            </form>
 
-                {filteredItems.map(item => (
-                    <div>{item}</div>
-                ))}
+            {filteredItems.map(item => (
+                <div>{item}</div>
+            ))}
 
         </div>
     )

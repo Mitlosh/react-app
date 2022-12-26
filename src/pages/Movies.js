@@ -3,6 +3,7 @@ import React, {useState, useRef} from "react";
 function Movies() {
     const queryRef = useRef()
     const [movies, setMovies] = useState([])
+    const [watchlist, setWatchlist] = useState(false)
   
     async function getMovies(e) {
       e.preventDefault()
@@ -17,30 +18,33 @@ function Movies() {
         const data = await res.json()
         setMovies(data.results)
         queryRef.current.value = ''
-        console.log(data.results)
       }catch(err){
         alert('Error')
         console.error(err)
       }
     }
 
+    function toggleWatchlist() {
+      setWatchlist(prev => !prev)
+      console.log(watchlist)
+    }
+
     return (
-        <main>
-        <div className="container main-grid">
+      <main>
+        <div className="primary-grid">
 
           <form className='movie-search-form' onSubmit={getMovies}>
-            <h1>React Movie Search</h1>
-            <label htmlFor='searchbar'>Find movie</label>
+            <h1 className="movie-search-title">React Movie Search</h1>
+            <label htmlFor='searchbar'></label>
             <input type='text'
               placeholder='For example "Batman"'
               name='searchbar'
               ref={queryRef}
             />
-            <button className='form-btn' type='submit'>Search</button>
+            <button className='movie-form-btn' type='submit'>Search</button>
           </form>
 
           <div className='movies-list'>
-
             {movies.map(movie => (
               <div className='movie-card' key={movie.id}>
                 <img
@@ -48,7 +52,12 @@ function Movies() {
                   src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt=''/>
 
                 <div className='movie-card-details'>
-                  <h2>{movie.title}</h2>
+                  <div>
+                    <h2>{movie.title}</h2>
+                    <button className="watchlist-btn" onClick={toggleWatchlist}>
+                      {watchlist ? "Watchlist" : "Remove"}
+                    </button>
+                  </div>
                   <p className='release-date'>{movie.release_date}</p>
                   <p className='vote-average'>{movie.vote_average} <small>({movie.vote_count} votes)</small></p>
                   <p className='overview'>{movie.overview}</p>
@@ -56,8 +65,8 @@ function Movies() {
                 </div>
               </div>
             ))}
-
           </div>
+
         </div>
       </main>
     )

@@ -24,7 +24,8 @@ function Game() {
 
     function renderMoves() {
         return (
-            <button onClick={() => setBoard(Array(9).fill(null))}>
+            <button className='btn'
+                onClick={() => setBoard(Array(9).fill(null))}>
                 Start Game
             </button>
         )
