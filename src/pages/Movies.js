@@ -2,7 +2,7 @@ import React, {useState, useRef} from "react";
 
 function Movies() {
     const queryRef = useRef()
-    const [movies, setMovies] = useState([])
+    const [moviesData, setMoviesData] = useState([])
     const [watchlist, setWatchlist] = useState(false)
   
     async function getMovies(e) {
@@ -16,7 +16,8 @@ function Movies() {
           throw new Error(res.status)
         }
         const data = await res.json()
-        setMovies(data.results)
+        setMoviesData(data.results)
+        console.log(data.results)
         queryRef.current.value = ''
       }catch(err){
         alert('Error')
@@ -45,23 +46,24 @@ function Movies() {
           </form>
 
           <div className='movies-list'>
-            {movies.map(movie => (
+            {moviesData.map(movie => (
               <div className='movie-card' key={movie.id}>
                 <img
                   className='movie-card-poster' 
                   src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`} alt=''/>
 
                 <div className='movie-card-details'>
-                  <div>
-                    <h2>{movie.title}</h2>
+                  <div className="watchlist-flex">
+                    <h2 className="movie-title">{movie.title}</h2>
                     <button className="watchlist-btn" onClick={toggleWatchlist}>
-                      {watchlist ? "Watchlist" : "Remove"}
+                      {watchlist ? "Add to Watchlist" : "Remove from watchlist"}
                     </button>
                   </div>
                   <p className='release-date'>{movie.release_date}</p>
-                  <p className='vote-average'>{movie.vote_average} <small>({movie.vote_count} votes)</small></p>
+                  <p className='vote-average'>{movie.vote_average} 
+                  <small>({movie.vote_count} votes)</small></p>
                   <p className='overview'>{movie.overview}</p>
-                  <input type='checkbox' className='expand-btn' />
+                  {/* <input type='checkbox' className='expand-btn' /> */}
                 </div>
               </div>
             ))}

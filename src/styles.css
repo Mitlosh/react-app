@@ -13,11 +13,23 @@ input {
 
 body {
   margin: 0;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
   color: #fff;
   --react-bg-color: #282c34;
   --bg-color: #2c3e50
+}
+
+/* Buttons */
+
+.watchlist-btn {
+  padding: .5em 1em;
+  background-color: var(--bg-color);
+  color: white;
+  font-family: inherit;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 /* ==============================
@@ -93,7 +105,7 @@ body {
   width: 75%;
   border: none;
   border-radius: 6px 0 0 6px;
-  padding: .75em;
+  padding: .75em 1.5em;
 }
 
 .movie-form-btn {
@@ -102,8 +114,17 @@ body {
   border-radius: 0 6px 6px 0;
   background-color: var(--react-bg-color);
   color: white;
-  padding: .75em 1.5em;
+  padding: 1em 1.5em;
   cursor: pointer;
+}
+
+.movie-card-poster {
+  margin-right: 1em;
+  border-radius: 8px;
+}
+
+.movie-card-details {
+  width: 70%;
 }
 
 .movies-list {
@@ -116,9 +137,21 @@ body {
   margin: 2em auto;
 }
 
+.watchlist-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-title,
+.release-date,
+.vote-average {
+  margin: .5em 0;
+}
+
 /*  Overview button expand  */
 
-.overview {
+/* .overview {
   --max-lines: 4;
   --line-height: 1.4;
   
@@ -136,11 +169,6 @@ body {
   width: 100%;
   bottom: 0;
   background: linear-gradient(to bottom, transparent, var(--bg-color));
-}
-
-.movie-card-poster {
-  margin-right: 1em;
-  border-radius: 8px;
 }
 
 .expand-btn {
@@ -167,6 +195,6 @@ body {
 
 .overview:has(+ .expand-btn:checked) {
   max-height: none;
-}
+} */
 
 
