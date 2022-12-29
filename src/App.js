@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import ToDo from './pages/ToDo.js'
 import Game from './pages/TicTac Toe/Game'
 import Navbar from './Navbar';
-import Movies from './pages/Movies.js';
+import Movies from './pages/Movies/Movies.js';
 
 function App() {
   
