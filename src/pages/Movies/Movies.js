@@ -4,7 +4,7 @@ import Card from "./Card";
 function Movies() {
     const queryRef = useRef()
     const [moviesData, setMoviesData] = useState([])
-    const [watchlist, setWatchlist] = useState(true)
+    const [isWatchlist, setIsWatchlist] = useState(true)
     const [watchlistData, setWatchlistData] = useState([])
   
     async function getMovies(e) {
@@ -27,33 +27,27 @@ function Movies() {
     }
 
     function toggleWatchlist(id) {
-      setWatchlist(prev => !prev)
+      setIsWatchlist(prev => !prev)
 
       setMoviesData(movies => movies.map(movie => {
-        return movie.id === id ? 
-            {...movie, active: !movie.active} :
-            movie
+        // console.log(movie)
+        if (movie.id === id){
+          // {...movie, active: !movie.active}
+          setWatchlistData(prev => ([...prev, {movie}]))
+          return watchlistData
+        }  
+        else 
+          return movie
+        
       }))
-      console.log(moviesData[0].active)
-      // moviesData.map(movie => {
-      //   if (movie.id === id){
-      //     setWatchlistData(prev => [...prev, id])
-      //   }
+      
+      // setWatchlistData(prev => {
+      //   prev.filter(item => item.id !== 2)
       // })
+      console.log(watchlistData)      
     }
 
-    
 
-    // function toggleWatchlist(ttId) {
-    //   if (!savedMovies.includes(ttId)) {
-    //       savedMovies.push(ttId)
-    //       localStorage.setItem("movies", JSON.stringify(savedMovies))
-    //   } else {
-    //       const index = savedMovies.indexOf(ttId)
-    //       if (index > -1) savedMovies.splice(index, 1)
-    //       localStorage.setItem("movies", JSON.stringify(savedMovies))
-    //   }
-    // }
 
     return (
       <main>
@@ -84,7 +78,7 @@ function Movies() {
                 overview = {movie.overview}
                 active = {movie.active}
                 toggleWatchlist={toggleWatchlist}
-                watchlist={watchlist}
+                isWatchlist={isWatchlist}
                 watchlistData={watchlistData}
               />
             ))}
