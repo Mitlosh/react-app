@@ -1,4 +1,5 @@
 import React, {useState, useRef} from "react";
+import { Route, Routes, Link } from 'react-router-dom';
 import Card from "./Card";
 
 function Movies() {
@@ -30,31 +31,29 @@ function Movies() {
       setIsWatchlist(prev => !prev)
 
       setMoviesData(movies => movies.map(movie => {
-        // console.log(movie)
         if (movie.id === id){
-          // {...movie, active: !movie.active}
-          setWatchlistData(prev => ([...prev, {movie}]))
-          return watchlistData
-        }  
-        else 
-          return movie
-        
-      }))
+          return {...movie, active: !movie.active}}
+          else {
+            return movie}
+      }))     
+      setWatchlistData(prev => [...prev, id])
       
       // setWatchlistData(prev => {
-      //   prev.filter(item => item.id !== 2)
-      // })
-      console.log(watchlistData)      
+        //   prev.filter(item => item.id !== 2)
+        // })
     }
-
+      
+      console.log(watchlistData)
 
 
     return (
       <main>
         <div className="primary-grid">
-
           <form className='movie-search-form' onSubmit={getMovies}>
             <h1 className="movie-search-title">React Movie Search</h1>
+            
+            <p><Link to="/watchlist">Watchlist</Link></p>
+
             <label htmlFor='searchbar'></label>
             <input type='text'
               placeholder='For example "Batman"'
