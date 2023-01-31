@@ -10,12 +10,12 @@ function Card(props) {
             <div className='movie-card-details'>
                 <div className="watchlist-flex">
                 <h2 className="movie-title">{props.title}</h2>
-                <button
+                {/* <button
                     className="watchlist-btn"
                     onClick={() => props.toggleWatchlist(props.id)}
                 >
                     {props.active ? "Remove from watchlist" : "Add to Watchlist"}
-                </button>
+                </button> */}
                 </div>
                 <p className='release-date'>{props.release_date}</p>
                 <p className='vote-average'>{props.vote_average} 
